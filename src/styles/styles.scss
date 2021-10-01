@@ -1,0 +1,211 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&display=swap");
+$text_white: white;
+$text_grey: rgb(214, 214, 214);
+$background1: rgb(20, 20, 20);
+$background2: rgb(0, 0, 20);
+$max_width: 1300px;
+$radius: 15px;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+  font-family: "Nunito";
+  color: $text_white;
+  background-color: $background1;
+}
+
+* body::-webkit-scrollbar {
+  width: 12px;
+}
+body::-webkit-scrollbar-track {
+  background: hsla(0, 0%, 2%, 0);
+}
+body::-webkit-scrollbar-thumb {
+  background-color: rgb(207, 207, 207);
+  border-radius: 25px;
+  border: 3px solid hsl(0, 0%, 2%);
+}
+body::-webkit-scrollbar-thumb:hover {
+  background: hsl(0, 0%, 60%);
+}
+
+h1 {
+  font-size: 60px;
+  font-weight: 600;
+}
+
+h2 {
+  font-size: 40px;
+}
+
+.spinner {
+  border: 5px solid $text_grey;
+  border-top: 5px solid $background1;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 0.8s linear infinite;
+  margin: 20px auto;
+  place-self: center;
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+.header {
+  padding: 20px 40px;
+}
+
+.homeContainer {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-gap: 20px;
+  justify-items: center;
+
+  .grid {
+    padding-right: 20px;
+    display: flex;
+    justify-content: center;
+    grid-gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+  }
+
+  .menu {
+    padding: 20px;
+    width: 100%;
+    background-color: $background2;
+  }
+
+  .assignments {
+    padding: 20px;
+    width: 100%;
+    max-width: 500px;
+    background-color: $background2;
+    border-radius: $radius;
+    height: fit-content;
+  }
+
+  .tasksContainer {
+    padding: 20px;
+    width: 100%;
+    max-width: 500px;
+    background-color: $background2;
+    border-radius: $radius;
+    height: fit-content;
+
+    .taskForm {
+      margin-top: 10px;
+      width: 100%;
+      border-radius: $radius;
+      overflow: hidden;
+
+      .input {
+        display: flex;
+        width: 100%;
+
+        input {
+          width: 100%;
+          height: 45px;
+          border: none;
+          padding: 5px 10px 5px 20px;
+          background-color: blue;
+          color: $text_white;
+          outline: none;
+          font-size: 16px;
+        }
+        button {
+          background-color: $text_white;
+          border: none;
+          outline: none;
+          padding: 5px 15px;
+          font-size: 20px;
+          transition: 0.3s;
+          cursor: pointer;
+
+          &:hover {
+            background-color: $text_grey;
+          }
+        }
+      }
+    }
+
+    h3 {
+      margin-top: 10px;
+    }
+
+    .todos {
+      margin-top: 30px;
+      display: grid;
+      grid-gap: 4px;
+      border-radius: $radius;
+      overflow: hidden;
+
+      .todo {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        width: 100%;
+        grid-gap: 10px;
+        background-color: blue;
+        padding: 10px;
+        font-size: 20px;
+
+        p {
+          overflow-x: hidden;
+        }
+
+        .doneBtn {
+          place-self: center;
+          background-color: transparent;
+          border: 3px solid $text_white;
+          outline: none;
+          border-radius: 50%;
+          height: 18px;
+          width: 18px;
+          margin-left: 6px;
+          margin-right: 10px;
+          cursor: pointer;
+          transition: 0.3s;
+        }
+
+        .delBtn {
+          place-self: center;
+          height: 18px;
+          width: 18px;
+          background-color: transparent;
+          border: none;
+          outline: none;
+          color: $text_white;
+          font-size: 15px;
+          cursor: pointer;
+        }
+      }
+
+      .markDone {
+        .doneBtn {
+          background-color: $text_white;
+        }
+
+        p {
+          text-decoration: line-through;
+        }
+      }
+    }
+  }
+}
