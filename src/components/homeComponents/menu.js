@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 
 const Menu = () => {
   const [render, setRender] = useState(0);
+  const [addBtn, setAddBtn] = useState(0);
+  const [delBtn, setDelBtn] = useState(0);
+
   const taskInput = useRef("");
 
   let data = [];
@@ -13,7 +16,7 @@ const Menu = () => {
     e.preventDefault();
     data.push(taskInput.current.value);
     localStorage.setItem("menuBtns", JSON.stringify(data));
-    render === 0 ? setRender(1) : setRender(0);
+    setAddBtn(0);
   };
 
   return (
@@ -27,15 +30,17 @@ const Menu = () => {
                 <Link to={`/${btnName}`}>
                   <button key={index}>{btnName}</button>
                 </Link>
-                <button
-                  onClick={() => {
-                    data.splice(index, 1);
-                    localStorage.setItem("menuBtns", JSON.stringify(data));
-                    render === 0 ? setRender(1) : setRender(0);
-                  }}
-                >
-                  Del
-                </button>
+                {delBtn === 1 ? (
+                  <button
+                    onClick={() => {
+                      data.splice(index, 1);
+                      localStorage.setItem("menuBtns", JSON.stringify(data));
+                      render === 0 ? setRender(1) : setRender(0);
+                    }}
+                  >
+                    Del
+                  </button>
+                ) : null}
               </div>
             );
           })}
@@ -44,21 +49,40 @@ const Menu = () => {
         <h3>Add Some!</h3>
       )}
 
-      <div>
-        <form onSubmit={handleSubmit}>
-          <div className="input">
-            <input
-              type="text"
-              ref={taskInput}
-              placeholder="Enter here..."
-              required
-            />
-            <button className="submitBtn" type="submit">
-              Submit
-            </button>
-          </div>
-        </form>
-      </div>
+      {addBtn === 1 ? (
+        <div>
+          <form onSubmit={handleSubmit}>
+            <div className="input">
+              <input
+                type="text"
+                ref={taskInput}
+                placeholder="Enter here..."
+                required
+              />
+              <button className="submitBtn" type="submit">
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
+      ) : null}
+
+      <button
+        onClick={() => {
+          if (addBtn === 0) setAddBtn(1);
+          else setAddBtn(0);
+        }}
+      >
+        {addBtn === 0 ? "Add" : "Cancel"}
+      </button>
+      <button
+        onClick={() => {
+          if (delBtn === 0) setDelBtn(1);
+          else setDelBtn(0);
+        }}
+      >
+        {delBtn === 0 ? "Delete" : "Done"}
+      </button>
     </div>
   );
 };
